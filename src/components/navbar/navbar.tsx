@@ -1,3 +1,4 @@
+import { MyButton } from "@/UI"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -9,6 +10,7 @@ const Navbar = () => {
 <Link href={'/'} className="flex justify-center items-center">
  <Image src={'/logo.svg'} alt="car hub logo" className="object-contain" width={118} height={18}/>
 </Link>
+<MyButton title="Sign In" type="button" containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"/>
  </nav>
   </header>
   )
