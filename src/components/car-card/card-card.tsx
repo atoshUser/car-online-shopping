@@ -5,6 +5,8 @@ import { calculateCarRent } from '@/helper'
 import Image from 'next/image'
 import { MyButton } from '@/UI'
 import { CarDetails } from '..'
+import {RequestData} from "@/server/get-options"
+
 
 const CarCard:React.FC<ICarCardProps> = (props):JSX.Element => {
     const {city_mpg,combination_mpg,cylinders,
@@ -33,7 +35,7 @@ const CarCard:React.FC<ICarCardProps> = (props):JSX.Element => {
             <span className="self-end text-[14px] font-medium">/day</span>
         </p>
         <div className='relative w-full h-40 my-3 object-contain'>
-   <Image src={'/hero.png'} alt='car-image' priority fill className='object-contain'/>
+   <Image src={RequestData.getCarImages(props.data)} alt='car-image' priority fill className='object-contain'/>
         </div>
         <div className="relative  flex w-full mt-2">
              <div className="flex   group-hover:invisible w-full justify-between text-gray">

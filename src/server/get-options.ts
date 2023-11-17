@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {ICarData} from "@/constants/index"
+
 
 
 axios.defaults.baseURL = 'https://cars-by-api-ninjas.p.rapidapi.com/v1/'
@@ -13,14 +15,26 @@ axios.defaults.headers['x-rapidapi-host'] = 'cars-by-api-ninjas.p.rapidapi.com'
 // };
 
 export const RequestData = { 
-
+ 
    
   async getCars(){
     try {
-      const {data} = await axios(`cars`,{params:{model:'bmw'}})
+      const {data} = await axios(`cars`,{params:{model:'q3'}})
       return data
     } catch (error) {
     return  'something went wrong'      
     }
+  },
+
+  getCarImages(car:ICarData,angle?:string) {
+    const url = new URL('https://cdn.imagin.studio/getimage')
+    const {make,year,model} = car
+    url.searchParams.append('customer','hrjavascript-mastery')
+    url.searchParams.append('make',make)
+    url.searchParams.append('modelFamily',model.split(' ')[0])
+    url.searchParams.append('zoomType','fullscreen')
+    url.searchParams.append('modelYear',`${year}`)
+    url.searchParams.append('angle',`${angle}`)
+    return `${url}`
   }
 }
