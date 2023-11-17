@@ -1,3 +1,6 @@
 export {default as Hero} from "./hero/hero"
 export {default as Footer} from "./footer/footer"
 export {default as Navbar} from "./navbar/navbar"
+export {default as SearchManufacture} from "./search-manufacture/search-manufacture"
+export {default as CarCard} from "./car-card/card-card"
+export {default as CarDetails } from "./car-details/car-details"

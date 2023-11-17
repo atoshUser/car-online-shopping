@@ -3,4 +3,7 @@ export interface IMyButton extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLBu
 title:string
 containerStyles?:string
 handleClick?:() => void
+textStyles?:string
+rightIcon?:string
+isDisabled?:boolean
 }

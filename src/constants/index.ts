@@ -42,7 +42,14 @@ export const manufacturers = [
     "Volvo",
   ];
   
-  export const yearsOfProduction = [
+
+  interface IYearOfProduction {
+    title:string
+    value:string
+  }
+
+
+  export const yearsOfProduction:IYearOfProduction[] = [
     { title: "Year", value: "" },
     { title: "2015", value: "2015" },
     { title: "2016", value: "2016" },
@@ -55,7 +62,9 @@ export const manufacturers = [
     { title: "2023", value: "2023" },
   ];
   
-  export const fuels = [
+
+  interface IFuel extends IYearOfProduction {}
+  export const fuels:IFuel[] = [
     {
       title: "Fuel",
       value: "",
@@ -70,7 +79,19 @@ export const manufacturers = [
     },
   ];
   
-  export const footerLinks = [
+   
+   interface IFooterData {
+     title:string
+     links:ILinks[]
+   }
+
+
+   interface ILinks {
+    title:string
+    url:string
+   }
+
+  export const footerLinks:IFooterData[] = [
     {
       title: "About",
       links: [
@@ -99,3 +120,21 @@ export const manufacturers = [
       ],
     },
   ];
+
+
+  // From rapid api
+
+  export interface ICarData {
+    city_mpg: number;
+    class: string;
+    combination_mpg: number;
+    cylinders: number;
+    displacement: number;
+    drive: string;
+    fuel_type: string;
+    highway_mpg: number;
+    make: string;
+    model: string;
+    transmission: string;
+    year: number;
+  }

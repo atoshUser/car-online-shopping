@@ -2,7 +2,7 @@ import Image from "next/image"
 import { IMyButton } from "./button.props"
 import React from "react"
 
-const Button:React.FC<IMyButton> = ({...props}):JSX.Element => {
+const Button:React.FC<IMyButton> = ({textStyles,rightIcon,...props}):JSX.Element => {
   return (
    <button
   {...props}
@@ -11,7 +11,7 @@ const Button:React.FC<IMyButton> = ({...props}):JSX.Element => {
   className={`custom-btn ${props.containerStyles}`}
 
    >
-   <span className="flex-1">
+   <span className={`flex-1 ${textStyles}`}>
      {props.title}
    </span>
    </button>
