@@ -43,7 +43,7 @@ export const manufacturers = [
   ];
   
 
-  interface IYearOfProduction {
+  export interface IYearOfProduction {
     title:string
     value:string
   }

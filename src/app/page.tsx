@@ -1,14 +1,20 @@
 
 import { CustomFilter, SearchBar } from "@/UI";
 import { CarCard, Hero } from "@/components";
-import { ICarData } from "@/constants";
+import { ICarData, manufacturers } from "@/constants";
 import { RequestData } from "@/server/get-options";
 import {useEffect} from "react"
-export default async function Home () {
-  
+import {yearsOfProduction,fuels} from "@/constants/index"
 
-      const dataCars:ICarData[] = await RequestData.getCars()
-      console.log(dataCars);
+export default async function Home ({searchParams}) {
+  
+  const allCars:ICarData[] = await RequestData.getCars({manufacturer:searchParams.manufacturer || '',
+   year:searchParams.year || 2022,
+   fuel:searchParams.fuel || '',
+   limit:searchParams.limit || 10,model:searchParams.model || ''})
+
+    //   const dataCars:ICarData[] = await RequestData.getCars()
+     
       
        
  
@@ -27,14 +33,14 @@ export default async function Home () {
            <div className="home__filters">
            <SearchBar/>
             <div className="home__filter-container">
-               <CustomFilter title="fuel"/>
-               <CustomFilter title="year"/>
+               <CustomFilter title="fuel" options={fuels}/>
+               <CustomFilter title="year" options={yearsOfProduction}/>
             </div>
            </div>
           
-           {dataCars ? (
+           {allCars ? (
             <div className="home__cars-wrapper">
-                 {dataCars.map((car) => <CarCard data={car}/>)}
+                 {allCars.map((car) => <CarCard data={car}/>)}
             </div>
            ) : 
            (
