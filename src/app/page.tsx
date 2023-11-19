@@ -11,7 +11,7 @@ import {yearsOfProduction,fuels} from "@/constants/index"
 interface ISearchParams {
   manufacturer:string
   fuel:string
-  year:number | string
+  year:number  
   limit?:number 
   model?:string
 }
