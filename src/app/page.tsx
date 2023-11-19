@@ -1,23 +1,37 @@
-"use client"
+//"use client"
 
 
 import { CustomFilter, SearchBar } from "@/UI";
 import { CarCard, Hero, ShowMore } from "@/components";
 import { ICarData, manufacturers } from "@/constants";
-import { RequestData } from "@/server/get-options";
-import {useEffect,useState} from "react"
+import { IFilterProps, RequestData } from "@/server/get-options";
+import React, {useEffect,useState} from "react"
 import {yearsOfProduction,fuels} from "@/constants/index"
 
-export default async  function Home ({searchParams}) {
+interface ISearchParams {
+  manufacturer:string
+  fuel:string
+  year:number | string
+  limit?:number 
+  model?:string
+}
 
-  // const [allCars, setAllCars] = useState<ICarData[]>([])
+ export default async  function Home (searchParams:ISearchParams) {
+
+    
+  
+//   const [allCars, setAllCars] = useState<ICarData[]>([])
 //    const [loading, setloading] = useState<boolean>(false)
 
+// console.log(allCars);
 
   
 // //search states
 // const [manufacturer, setmManufacturer] = useState<string>('')
 // const [model, setModel] = useState<string>('')
+
+
+// console.log(model);
 
 // // filter states
 // const [fuel,setFuel] = useState('')
@@ -28,11 +42,15 @@ export default async  function Home ({searchParams}) {
 
    
 //    const getCars = async () => {
+//     setloading(true)
 //       try {
 //         const result = await  RequestData.getCars({manufacturer:manufacturer || '',
 //         year:year || 2022,
 //         fuel:fuel || '',
-//         limit:limit || 10,model:model || ''})
+//         limit:limit || 10,
+//        model:model || 'bmw'})
+       
+//        console.log(result);
        
 //         setAllCars(result)
 //       } catch (error) {

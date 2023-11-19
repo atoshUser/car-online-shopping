@@ -15,7 +15,7 @@ axios.defaults.headers['x-rapidapi-host'] = 'cars-by-api-ninjas.p.rapidapi.com'
 // };
 
 
-interface IFilterProps {
+export interface IFilterProps {
   manufacturer:string
   year:number
   fuel:string
