@@ -1,27 +1,61 @@
+"use client"
+
 
 import { CustomFilter, SearchBar } from "@/UI";
-import { CarCard, Hero } from "@/components";
+import { CarCard, Hero, ShowMore } from "@/components";
 import { ICarData, manufacturers } from "@/constants";
 import { RequestData } from "@/server/get-options";
-import {useEffect} from "react"
+import {useEffect,useState} from "react"
 import {yearsOfProduction,fuels} from "@/constants/index"
 
-export default async function Home ({searchParams}) {
+export default async  function Home ({searchParams}) {
+
+  // const [allCars, setAllCars] = useState<ICarData[]>([])
+//    const [loading, setloading] = useState<boolean>(false)
+
+
   
+// //search states
+// const [manufacturer, setmManufacturer] = useState<string>('')
+// const [model, setModel] = useState<string>('')
+
+// // filter states
+// const [fuel,setFuel] = useState('')
+// const [year,setYear] = useState(202)
+
+//   // pagination states
+// const [limit,setLimit] = useState(10)
+
+   
+//    const getCars = async () => {
+//       try {
+//         const result = await  RequestData.getCars({manufacturer:manufacturer || '',
+//         year:year || 2022,
+//         fuel:fuel || '',
+//         limit:limit || 10,model:model || ''})
+       
+//         setAllCars(result)
+//       } catch (error) {
+//         const res = error as Error
+//         console.log(res);
+//       }finally {
+//          setloading(false)
+//       }
+//    }
+
+//   useEffect(() => {
+//     getCars()
+//   },[fuel,year,limit,manufacturer,model])
+   
   const allCars:ICarData[] = await RequestData.getCars({manufacturer:searchParams.manufacturer || '',
    year:searchParams.year || 2022,
    fuel:searchParams.fuel || '',
    limit:searchParams.limit || 10,model:searchParams.model || ''})
 
-    //   const dataCars:ICarData[] = await RequestData.getCars()
+     // const dataCars:ICarData[] = await RequestData.getCars()
      
       
        
- 
-
- 
-    
-    
    return (
      <main className="overflow-hidden">
          <Hero/>
@@ -39,9 +73,16 @@ export default async function Home ({searchParams}) {
            </div>
           
            {allCars ? (
-            <div className="home__cars-wrapper">
+            <section>
+              <div className="home__cars-wrapper">
                  {allCars.map((car) => <CarCard data={car}/>)}
             </div>
+            <ShowMore
+             pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
+
+            </section>
            ) : 
            (
             <div className="home__error-container">

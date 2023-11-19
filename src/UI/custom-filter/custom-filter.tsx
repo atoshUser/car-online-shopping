@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation"
 import {Listbox,Transition} from "@headlessui/react"
 import { updateSearchParams } from "@/helper"
 const CustomFilter:React.FC<ICustomFilter> = ({title,options}):JSX.Element => {
+  //  const [AllCars, setAllCars] = useState(second)
+   
+
    const [selected, setSelected] = useState(options[0])
    const router = useRouter()
    const handleUpdateParams = (e:{title:string,value:string}) => {
@@ -44,10 +47,10 @@ const CustomFilter:React.FC<ICustomFilter> = ({title,options}):JSX.Element => {
    <Listbox.Option
     key={option.title}
     value={option}
-    className={({active}) =>  `relative cursor-pointer  py-2 px-4   ${active ? `bg-primary-blue text-white` : `text-gray-900`}`}
+    className={({active}) =>  `relative  py-2 px-4   ${active ? `bg-primary-blue text-white` : `text-gray-900`}`}
    >
       {({selected}) => (
-         <span className={`pl-3 block truncate ${selected ? 'font-medium' : 'font-normal'} `}>{option.title}</span>
+         <span className={`pl-3 block truncate cursor-pointer  ${selected ? 'font-medium' : 'font-normal'} `}>{option.title}</span>
       )}
       {/* <span>{option.title}</span> */}
    </Listbox.Option>
