@@ -1,4 +1,4 @@
-//"use client"
+"use client"
 
 
 import { CustomFilter, SearchBar } from "@/UI";
@@ -7,68 +7,70 @@ import { ICarData, manufacturers } from "@/constants";
 import { IFilterProps, RequestData } from "@/server/get-options";
 import React, {useEffect,useState} from "react"
 import {yearsOfProduction,fuels} from "@/constants/index"
+import Image from "next/image";
 
-interface ISearchParams {
-  manufacturer:string
-  fuel:string
-  year:number  
-  limit?:number 
-  model?:string
+type searchParamsProps = {
+  manufacturer: string,
+  model: string,
+  year: number,
+  fuel: string,
+  limit: number,
 }
 
- export default async  function Home (searchParams:ISearchParams) {
-
-    
-  
-//   const [allCars, setAllCars] = useState<ICarData[]>([])
-//    const [loading, setloading] = useState<boolean>(false)
-
-// console.log(allCars);
-
-  
-// //search states
-// const [manufacturer, setmManufacturer] = useState<string>('')
-// const [model, setModel] = useState<string>('')
-
-
-// console.log(model);
-
-// // filter states
-// const [fuel,setFuel] = useState('')
-// const [year,setYear] = useState(202)
-
-//   // pagination states
-// const [limit,setLimit] = useState(10)
+ export default   function Home () {
 
    
-//    const getCars = async () => {
-//     setloading(true)
-//       try {
-//         const result = await  RequestData.getCars({manufacturer:manufacturer || '',
-//         year:year || 2022,
-//         fuel:fuel || '',
-//         limit:limit || 10,
-//        model:model || 'bmw'})
-       
-//        console.log(result);
-       
-//         setAllCars(result)
-//       } catch (error) {
-//         const res = error as Error
-//         console.log(res);
-//       }finally {
-//          setloading(false)
-//       }
-//    }
+  
+  
+  const [allCars, setAllCars] = useState<ICarData[]>([])
+   const [loading, setloading] = useState<boolean>(false)
 
-//   useEffect(() => {
-//     getCars()
-//   },[fuel,year,limit,manufacturer,model])
+
+  
+//search states
+const [manufacturer, setmManufacturer] = useState<string>('')
+const [model, setModel] = useState<string>('')
+
+
+
+
+// filter states
+const [fuel,setFuel] = useState('')
+const [year,setYear] = useState(2022)
+
+  // pagination states
+const [limit,setLimit] = useState(10)
+
    
-  const allCars:ICarData[] = await RequestData.getCars({manufacturer:searchParams.manufacturer || '',
-   year:searchParams.year || 2022,
-   fuel:searchParams.fuel || '',
-   limit:searchParams.limit || 10,model:searchParams.model || ''})
+   const getCars = async () => {
+    setloading(true)
+      try {
+        const result = await  RequestData.getCars({manufacturer:manufacturer || '',
+        year:year || 2022,
+        fuel:fuel || '',
+        limit:limit || 10,
+       model:model || ''})
+       
+       console.log(result);
+       
+        setAllCars(result)
+      } catch (error) {
+        const res = error as Error
+        console.log(res);
+      }finally {
+         setloading(false)
+      }
+   }
+
+  useEffect(() => {
+    getCars()
+ 
+  },[fuel,year,limit,manufacturer,model])
+   
+  // const allCars:ICarData[] = await RequestData.getCars({manufacturer:searchParams.manufacturer || '',
+  //  year:searchParams.year || 2022,
+  //  fuel:searchParams.fuel || '',
+  //  limit:searchParams.limit || 10,model:searchParams.model || ''})
 
      // const dataCars:ICarData[] = await RequestData.getCars()
      
@@ -83,10 +85,10 @@ interface ISearchParams {
             <p>Explore The cars you might like</p>
            </div>
            <div className="home__filters">
-           <SearchBar/>
+           <SearchBar  />
             <div className="home__filter-container">
-               <CustomFilter title="fuel" options={fuels}/>
-               <CustomFilter title="year" options={yearsOfProduction}/>
+               <CustomFilter title="fuel" options={fuels}  />
+               <CustomFilter title="year" options={yearsOfProduction}  />
             </div>
            </div>
           
@@ -95,9 +97,12 @@ interface ISearchParams {
               <div className="home__cars-wrapper">
                  {allCars.map((car) => <CarCard data={car}/>)}
             </div>
+            {loading && (
+      <h3 className="text-center font-bold">Cars Loading...</h3>
+            )}
             <ShowMore
-             pageNumber={(searchParams.limit || 10) / 10}
-              isNext={(searchParams.limit || 10) > allCars.length}
+             pageNumber={(limit || 10) / 10}
+              isNext={(limit || 10) > allCars.length}
             />
 
             </section>
